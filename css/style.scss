@@ -38,38 +38,6 @@ body
     position: relative;
 }
 
-.hero main
-{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-    width: 100%;
-    padding: 1rem;
-    h1{
-        color: white;
-        font-size: clamp(1.7rem,6vw,3.2rem);
-        font-weight: 300;
-        padding-top: 7rem;
-        padding-left: 17%;
-        
-
-        @media screen and(max-width:1000px) {
-            padding-left: 0px;
-        }
-    }
-
-    .hero-caroussel
-    {
-        height: 250px;
-        width: 100%;
-        background: white;
-        border-radius: 5px;
-    }
-    
-}
-
 .lets-talk
 {
     position: fixed;
@@ -145,6 +113,7 @@ body
 .header
 {
     position: absolute;
+    z-index: 1;
     top: 0;
     left: 0;
     right: 0;
@@ -323,3 +292,126 @@ body
         }
     }
 }
+
+.hero main
+{
+    position: absolute;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100%;
+    padding: 1rem;
+    h1{
+        color: white;
+        font-size: clamp(1.7rem,6vw,3.2rem);
+        font-weight: 300;
+        padding-top: 7rem;
+        padding-left: 17%;
+        
+
+        @media screen and(max-width:1000px) {
+            padding-left: 0px;
+        }
+    }    
+}
+
+.hero-caroussel
+{
+    height: 250px;
+    width: 100%;
+    background: white;
+    border-radius: 5px;
+
+    &__left
+    {
+        width: 8%;
+        height: 100%;
+        position: relative;
+        .hero-caroussel-btns
+        {
+            position: absolute;
+            z-index: 1;
+            inset: 0;
+            
+            overflow: hidden;
+            border-radius: 5px 0 0 0;
+            .gray-block-top,.gray-block-bottom
+            {
+                position: absolute;
+                height: 50%;
+                width: 100%;
+                background:lightgray;
+                transform-origin: bottom;
+                transform: translateY(0%) scaleY(0.0035);
+                transition: transform .3s;
+            }
+            .gray-block-bottom
+            {
+                top: 50%;
+                transform-origin: top;
+            }
+
+            .caroussel-btn
+            {
+                border-right: 1px solid lightgray;
+                position: relative;
+                background: transparent;
+                width: 100%;
+                height: 50%;
+                cursor: pointer;
+                &::before
+                {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%,-50%);
+                    height: 8px;
+                    width: 8px;
+                    border-right: 1px solid black;
+                    border-bottom: 1px solid black;
+                }
+
+                &:nth-of-type(3)
+                {
+                    &::before
+                    {
+                        transform: translateY(-10px) rotate(-45deg) translateX(-8px);
+                    }
+                }
+                &:last-of-type
+                {
+                    &::before
+                    {
+                        transform: translateY(-10px) rotate(135deg);
+                    }
+                }
+            }
+        }
+
+        .slide-indicator
+        {
+            position: absolute;
+            z-index: 2;
+            top: 10px;
+            left: 10px;
+            font-weight: 300;
+            font-size: .8rem;
+            cursor: pointer;
+        }
+
+        .hero-caroussel-progressBar
+        {
+            position: absolute;
+            z-index: 3;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background:#E21F2C ;
+        }
+    }
+}
+

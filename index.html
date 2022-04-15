@@ -38,8 +38,50 @@
                 smarter, greener, <br>
                 and more efficient.</h1>
 
-            <div class="hero-caroussel"></div>
+            <div class="hero-caroussel">
+                <div class="hero-caroussel__left">
+                    <span class="slide-indicator">01</span>
+                    <div class="hero-caroussel-btns">
+                        <div class="gray-block-top"></div>
+                        <div class="gray-block-bottom"></div>
+                        <div class="btn-next caroussel-btn"></div>
+                        <div class="btn-prev caroussel-btn"></div>
+                    </div>
+                    <div class="hero-caroussel-progressBar"></div>
+                </div>
+            </div>
         </main>
     </section>
 </body>
+
+<script>
+    let heroCarosselBtns = document.querySelectorAll(".caroussel-btn");
+    let btnsSection = document.querySelector(".hero-caroussel-btns")
+
+    let grayBlockTop = document.querySelector(".gray-block-top");
+    let grayBlockBottom = document.querySelector(".gray-block-bottom");
+
+    heroCarosselBtns.forEach(element => {
+        element.addEventListener("mouseover",(e)=>{
+            if (e.target.classList.contains("btn-next")) {
+                
+                grayBlockTop.style.transform = `scaleY(1)`;
+            }
+            else
+            {
+                grayBlockBottom.style.transform = `scaleY(1)`;
+            }
+        })
+    });
+
+
+    heroCarosselBtns[0].addEventListener("mouseleave",(e)=>{
+        grayBlockTop.style.transform = `scaleY(0.0035)`;
+    })
+    heroCarosselBtns[1].addEventListener("mouseleave",(e)=>{
+        grayBlockBottom.style.transform = `scaleY(0.0035)`;
+    })
+
+</script>
+
 </html>
