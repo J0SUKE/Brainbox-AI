@@ -14,6 +14,28 @@
             <span>LET'S TALK</span>
         </p>
     </a>
+    
+    <menu class="header-menu active">
+        <div class="close-btn">
+            <span></span><span></span>
+        </div>
+        <div class="header-menu__right"></div>
+        <div class="header-menu__left"></div>
+        <div class="header-menu__bottom-img">
+            <img src="./assets/brainboxai-menu-building.jpg" alt="">
+            
+            <div class="lets-talk-btn">
+                <p>
+                    <span>LET'S TALK</span>
+                    <span>LET'S TALK</span>
+                </p>
+                <div class="arrow">
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </menu>
+
     <section class="hero">
         <header class=" header">
             <div class="header__left logo">
@@ -51,14 +73,17 @@
                 </div>
                 <div class="hero-caroussel__container">
                     <div class="hero-caroussel__content">
-                        <div class="hero-caroussel-item">
+                        <div class="hero-caroussel-item active">
                             <div class="hero-caroussel-item__left">
                                 <h1>
-                                    <span>Your building's energy</span>
-                                    <span>optimisation begins here</span>
+                                    <p><span>Your building's energy</span></p>
+                                    <p><span>optimisation begins here</span></p>
                                 </h1>
                                 <a href="#">
-                                    <p class="link-btn"></p>
+                                    <p class="link-btn">
+                                        <span>DISCOVER HOW</span>
+                                        <span>DISCOVER HOW</span>
+                                    </p>
                                     <span></span>
                                 </a>
                             </div>
@@ -73,12 +98,15 @@
                         <div class="hero-caroussel-item">
                             <div class="hero-caroussel-item__left">
                                 <h1>
-                                    <span>5 reasons commercial</span>
-                                    <span>buildings consume so much</span>
-                                    <span>energy</span>
+                                    <p><span>5 reasons commercial</span></p>
+                                    <p><span>buildings consume so much</span></p>
+                                    <p><span>energy</span></p>
                                 </h1>
                                 <a href="#">
-                                    <p class="link-btn"></p>
+                                    <p class="link-btn">
+                                        <span>READ THE BLOG POST</span>
+                                        <span>READ THE BLOG POST</span>
+                                    </p>
                                     <span></span>
                                 </a>
                             </div>
@@ -93,12 +121,15 @@
                         <div class="hero-caroussel-item">
                             <div class="hero-caroussel-item__left">
                                 <h1>
-                                    <span>BrainBox announces global</span>
-                                    <span>distribution agreement with</span>
-                                    <span>ABB</span>
+                                    <p><span>BrainBox announces global</span></p>
+                                    <p><span>distribution agreement with</span></p>
+                                    <p><span>ABB</span></p>
                                 </h1>
                                 <a href="#">
-                                    <p class="link-btn"></p>
+                                    <p class="link-btn">
+                                        <span>LEARN MORE</span>
+                                        <span>LEARN MORE</span>
+                                    </p>
                                     <span></span>
                                 </a>
                             </div>
@@ -124,6 +155,8 @@
     let grayBlockTop = document.querySelector(".gray-block-top");
     let grayBlockBottom = document.querySelector(".gray-block-bottom");
 
+    // effets hover sur les boutons du caroussel------------------
+
     heroCarosselBtns.forEach(element => {
         element.addEventListener("mouseover",(e)=>{
             if (e.target.classList.contains("btn-next")) {
@@ -141,10 +174,116 @@
     heroCarosselBtns[0].addEventListener("mouseleave",(e)=>{
         grayBlockTop.style.transform = `scaleY(0.0035)`;
     })
+    heroCarosselBtns[0].addEventListener("click",nextSlide);
+    
+    
     heroCarosselBtns[1].addEventListener("mouseleave",(e)=>{
         grayBlockBottom.style.transform = `scaleY(0.0035)`;
     })
+    heroCarosselBtns[1].addEventListener("click",PrevSlide);
+
+    //-----------gestion du caroussel-------------------------------
+
+    let compteur = 0;
+
+    let slidesContainer = document.querySelector(".hero-caroussel__content");
+    let slidesIdicator = document.querySelector(".slide-indicator");
+    let progressbar = document.querySelector(".hero-caroussel-progressBar");
+    let transitionValue = 500;
+    
+    //on duplique le premier slide
+    let firstSlide = document.querySelector(".hero-caroussel-item");
+    slidesContainer.append(firstSlide.cloneNode(true));
+
+    let slidesMax = slidesContainer.children.length;
+    let slides = [...slidesContainer.children];
+    
+    function nextSlide() {
+        
+        compteur++;
+        slidesContainer.style.transition = `transform ${transitionValue}ms`;
+        
+        setTimeout(() => {
+            setActiveSlideOn(slides[compteur]);    
+        }, transitionValue);
+        
+        ActualiseProgressBar()
+        slidesContainer.style.transform = `translateX(${-compteur*100}%)`;
+
+
+        if (compteur>=slidesMax-1) 
+        {
+            compteur=0;
+            setTimeout(() => {
+                slidesContainer.style.transition = `0ms`;
+                slidesContainer.style.transform = "translateX(0)";    
+            }, transitionValue);
+            
+        }
+
+    }
+
+    function PrevSlide() {
+    
+        
+        compteur--;
+        slidesContainer.style.transition = `transform ${transitionValue}ms`;
+        
+        if (compteur<0) 
+        {
+            slidesContainer.style.transition = `unset`;
+            slidesContainer.style.transform = `translateX(${-(slidesMax-1)*100}%)`;    
+
+            compteur=slidesMax-1;
+
+            setTimeout(PrevSlide,1);
+        }
+
+        ActualiseProgressBar();
+        slidesContainer.style.transform = `translateX(${-compteur*100}%)`;
+
+        setTimeout(() => {
+                setActiveSlideOn(slides[compteur]);    
+            }, transitionValue);
+            
+    }
+
+
+    function setActiveSlideOn(element) 
+    {
+        element.classList.add("active");
+        
+        [...slidesContainer.children].filter(e=>e!=element).forEach(element => {
+            element.classList.remove("active");
+        });
+
+        if (element==slides[0]) {
+            slides[slidesMax-1].classList.add("active");
+        }
+    }
+
+    function ActualiseProgressBar() {
+        slidesIdicator.innerHTML = (compteur==3 ? "01" : `0${compteur+1}`)
+        
+        let factor = (compteur==3 ? 1 : compteur+1);
+        progressbar.style.transform = `scaleX(${(factor/(slidesMax-1))})`;
+
+    }
+
+    //actualise l'indicateur du caroussel
+    ActualiseProgressBar()
+
+
+    //close btn animation------------------
+
+    let headerMenu = document.querySelector(".header-menu");
+    let closeBtn = document.querySelector(".header-menu .close-btn");
+
+    closeBtn.addEventListener("click",()=>{
+        headerMenu.classList.toggle("inactive");
+    })
 
 </script>
+
 
 </html>
