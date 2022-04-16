@@ -81,12 +81,14 @@
                 </div>
             </div>
         </header>
-        <main>
-            <h1 class="hero-title">Making buildings <br>
-                smarter, greener, <br>
-                and more efficient.</h1>
+        <main class="active">
+            <h1 class="hero-title">
+                <p><span>Making buildings</span></p>
+                <p><span>smarter, greener,</span></p>
+                <p><span>and more efficient.</span></p>
+            </h1>
 
-            <div class="hero-caroussel">
+            <div class="hero-caroussel active">
                 <div class="hero-caroussel__left">
                     <span class="slide-indicator">01</span>
                     <div class="hero-caroussel-btns">
@@ -99,7 +101,7 @@
                 </div>
                 <div class="hero-caroussel__container">
                     <div class="hero-caroussel__content">
-                        <div class="hero-caroussel-item active">
+                        <div class="hero-caroussel-item">
                             <div class="hero-caroussel-item__left">
                                 <h1>
                                     <p><span>Your building's energy</span></p>
@@ -174,6 +176,7 @@
     </section>
 </body>
 
+
 <script>
     let heroCarosselBtns = document.querySelectorAll(".caroussel-btn");
     let btnsSection = document.querySelector(".hero-caroussel-btns")
@@ -216,7 +219,7 @@
     let slidesIdicator = document.querySelector(".slide-indicator");
     let progressbar = document.querySelector(".hero-caroussel-progressBar");
     let transitionValue = 500;
-    
+
     //on duplique le premier slide
     let firstSlide = document.querySelector(".hero-caroussel-item");
     slidesContainer.append(firstSlide.cloneNode(true));
@@ -224,6 +227,12 @@
     let slidesMax = slidesContainer.children.length;
     let slides = [...slidesContainer.children];
     
+    //on active le premier slide apres un cours timeout
+    setTimeout(() => {
+        slides[0].classList.add("active");
+    }, 1000);
+
+
     function nextSlide() {
         
         compteur++;

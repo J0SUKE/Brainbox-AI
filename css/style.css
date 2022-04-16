@@ -992,20 +992,71 @@ body::-webkit-scrollbar-thumb {
   padding-left: 17%;
 }
 
+.hero main .hero-title p {
+  overflow: hidden;
+}
+
+.hero main .hero-title span {
+  display: block;
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
+}
+
 @media screen and (max-width: 1000px) {
   .hero main .hero-title {
     padding-left: 0px;
   }
 }
 
+@-webkit-keyframes animateMainTitle {
+  from {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  to {
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
+}
+
+@keyframes animateMainTitle {
+  from {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  to {
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
+}
+
+.hero main.active .hero-title p:nth-of-type(1) span {
+  -webkit-animation: animateMainTitle .6s .4s forwards ease-in-out;
+          animation: animateMainTitle .6s .4s forwards ease-in-out;
+}
+
+.hero main.active .hero-title p:nth-of-type(2) span {
+  -webkit-animation: animateMainTitle .6s .55s forwards ease-in-out;
+          animation: animateMainTitle .6s .55s forwards ease-in-out;
+}
+
+.hero main.active .hero-title p:nth-of-type(3) span {
+  -webkit-animation: animateMainTitle .6s .7s forwards ease-in-out;
+          animation: animateMainTitle .6s .7s forwards ease-in-out;
+}
+
 .hero-caroussel {
-  height: 250px;
+  min-height: 250px;
   width: 100%;
   background: white;
   border-radius: 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-transform-origin: left;
+          transform-origin: left;
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
 }
 
 .hero-caroussel__left {
@@ -1099,6 +1150,83 @@ body::-webkit-scrollbar-thumb {
   transition: transform .3s, -webkit-transform .3s;
   -webkit-transform-origin: left;
           transform-origin: left;
+}
+
+@media screen and (max-width: 1000px) {
+  .hero-caroussel {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .hero-caroussel__left {
+    width: 100%;
+    height: 25%;
+  }
+  .hero-caroussel__left .hero-caroussel-progressBar {
+    display: none;
+  }
+  .hero-caroussel__left .gray-block-top, .hero-caroussel__left .gray-block-bottom {
+    display: none;
+  }
+  .hero-caroussel__left .hero-caroussel-btns {
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+        -ms-flex-flow: row-reverse;
+            flex-flow: row-reverse;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .hero-caroussel__left .hero-caroussel-btns .caroussel-btn {
+    min-height: 100%;
+    border-bottom: 1px solid lightgray;
+  }
+  .hero-caroussel__left .hero-caroussel-btns .caroussel-btn:nth-of-type(3)::before {
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+  }
+  .hero-caroussel__left .hero-caroussel-btns .caroussel-btn:last-of-type::before {
+    -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .hero-caroussel__left {
+    height: 20%;
+  }
+}
+
+.hero-caroussel.active {
+  -webkit-animation: animateCaroussel .8s .4s forwards;
+          animation: animateCaroussel .8s .4s forwards;
+}
+
+@-webkit-keyframes animateCaroussel {
+  from {
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+  }
+  to {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+  }
+}
+
+@keyframes animateCaroussel {
+  from {
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+  }
+  to {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+  }
 }
 
 .hero-caroussel__container {
@@ -1483,6 +1611,40 @@ body::-webkit-scrollbar-thumb {
     -webkit-transform: translateY(0%);
             transform: translateY(0%);
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .hero-caroussel__container {
+    height: 75%;
+    width: 100%;
+    padding-top: 1.5em;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .hero-caroussel__container {
+    height: 400px;
+    padding-bottom: 1rem;
+  }
+  .hero-caroussel__container .hero-caroussel-item {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .hero-caroussel__container .hero-caroussel-item__left {
+    padding: 0;
+  }
+  .hero-caroussel__container .hero-caroussel-item__left h1 {
+    width: 100%;
+  }
+  .hero-caroussel__container .hero-caroussel-item__left a {
+    margin: 2rem 0;
+  }
+  .hero-caroussel__container .hero-caroussel-item__right {
+    width: 100%;
+    min-height: 100px;
   }
 }
 /*# sourceMappingURL=style.css.map */
