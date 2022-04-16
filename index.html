@@ -15,12 +15,38 @@
         </p>
     </a>
     
-    <menu class="header-menu active">
+    <menu class="header-menu">
         <div class="close-btn">
             <span></span><span></span>
         </div>
-        <div class="header-menu__right"></div>
-        <div class="header-menu__left"></div>
+        <div class="header-menu__right">
+            <div class="header-menu__right__top">
+                <span>FR</span>
+            </div>
+            <ul class="big-links">
+                <li><a href="#">Product</a></li>
+                <li><a href="#">Sustainability</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Partners</a></li>
+            </ul>
+
+            <ul class="small-links">
+                <li><a href="#">White papers<span>(3)</span></a></li>
+                <li><a href="#">Podcasts<span>(4)</span></a></li>
+                <li><a href="#">Articles<span>(50)</span></a></li>
+                <li><a href="#">Case Studies<span>(4)</span></a></li>
+            </ul>
+
+        </div>
+        <div class="header-menu__right-img">
+            <img src="./assets/brainboxai-product.jpg" alt="">
+        </div>
+        <div class="header-menu__left">
+            <a href="" class="logo">
+                <span>BRAINBOX AI</span>
+            </a>
+        </div>
         <div class="header-menu__bottom-img">
             <img src="./assets/brainboxai-menu-building.jpg" alt="">
             
@@ -37,7 +63,7 @@
     </menu>
 
     <section class="hero">
-        <header class=" header">
+        <header class="header">
             <div class="header__left logo">
                 <a href="#">BRAINBOX 
                     <span>AI</span>
@@ -277,11 +303,27 @@
     //close btn animation------------------
 
     let headerMenu = document.querySelector(".header-menu");
+    let menuBtn = document.querySelector(".header .menu-btn");
+    
     let closeBtn = document.querySelector(".header-menu .close-btn");
 
-    closeBtn.addEventListener("click",()=>{
-        headerMenu.classList.toggle("inactive");
-    })
+
+    function openHeaderMenu() {
+        headerMenu.style.display = "unset";
+        headerMenu.classList.add("active");
+    }
+
+    function closeHeaderMenu() {
+        headerMenu.classList.add("inactive");
+        setTimeout(() => {
+            headerMenu.style.display = "none";
+            headerMenu.classList.remove("active");
+            headerMenu.classList.remove("inactive");
+        }, 1000);
+    }
+
+    closeBtn.addEventListener("click",closeHeaderMenu);
+    menuBtn.addEventListener("click",openHeaderMenu);
 
 </script>
 
