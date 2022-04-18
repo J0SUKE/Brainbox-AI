@@ -8,6 +8,6 @@
 
   <p align="center">
     <br />
-    <a href=" https://j0suke.github.io/Brainbox-AI/">View Demo</a>
+    <a href="https://j0suke.github.io/Brainbox-AI/">View Demo</a>
   </p>
 </div>
